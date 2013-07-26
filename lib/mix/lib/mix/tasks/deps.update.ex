@@ -7,7 +7,7 @@ defmodule Mix.Tasks.Deps.Update do
   @moduledoc """
   Update the given dependencies.
 
-  Since this is a "dangerous" operation, update of all dependencies
+  Since this is a destructive action, update of all dependencies
   can only happen by passing the `--all` command line option.
 
   All dependencies are automatically recompiled after update.
@@ -73,7 +73,7 @@ defmodule Mix.Tasks.Deps.Update do
 
   defp check_unavailable!(dep) do
     unless available?(dep) do
-      raise Mix.Error, message: "Cannot update dependency #{dep.app} because " <>
+      raise Mix.Error, message: "cannot update dependency #{dep.app} because " <>
         "it isn't available, run `mix deps.get` first"
     end
     dep

@@ -140,7 +140,7 @@ defmodule Mix.Tasks.DepsTest do
     in_fixture "no_mixfile", fn ->
       Mix.Deps.Lock.write [git_repo: "abcdef"]
       assert Mix.Deps.Lock.read == [git_repo: "abcdef"]
-      Mix.Tasks.Deps.Unlock.run []
+      Mix.Tasks.Deps.Unlock.run ["--all"]
       assert Mix.Deps.Lock.read == []
     end
   end
@@ -263,10 +263,12 @@ defmodule Mix.Tasks.DepsTest do
       Mix.Tasks.Deps.Get.run []
       message = "* Getting git_repo [git: #{inspect fixture_path("git_repo")}]"
       assert_received { :mix_shell, :info, [^message] }
+      assert_received { :mix_shell, :info, ["* Compiling deps_repo"] }
       assert_received { :mix_shell, :info, ["Generated git_repo.app"] }
 
       Mix.Tasks.Deps.Update.run ["--all"]
       assert_received { :mix_shell, :info, ["* Updating deps_repo (0.1.0) [path: \"custom/deps_repo\"]"] }
+      assert_received { :mix_shell, :info, ["* Compiling deps_repo"] }
     end
   after
     Mix.Project.pop
