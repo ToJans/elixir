@@ -49,7 +49,7 @@ erlang:
 	$(Q) cd lib/elixir && $(REBAR) compile
 
 compile_windows:
-	$(Q) gcc -o bin/wac windows/wac/wac.c
+	$(Q) gcc -o bin/wac windows/wac/wac.c windows/wac/handler.c  -std=gnu99
 
 # Since Mix depends on EEx and EEx depends on
 # Mix, we first compile EEx without the .app

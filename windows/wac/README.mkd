@@ -1,0 +1,46 @@
+wac (stands for **W**indows **A**NSI **C**olor; always lowercase) is a small command
+line utility that enables you to use many common ANSI escape codes in the Windows
+command line.
+
+Source of specification: http://invisible-island.net/xterm/ctlseqs/ctlseqs.html
+
+Usage
+-----
+
+wac works as a filter, so just pipe the raw data into it and you get a nice formatted
+output. Like this (`printcol.bat` is included in the welcome pack):
+
+    printcol.bat | wac
+
+Download & Installation
+-----------------------
+
+Straightforward -- simply clone and make.
+
+    git clone git://github.com/mgrabovsky/wac.git
+    cd wac
+	make
+
+Put the compiled executable somewhere in your `PATH`, if you want to use it outside
+of this directory.
+
+Why use it
+----------
+
+Some command line tools (like [Cucumber](http://cukes.info)) like to print ANSI
+colors. Since Windows NT doesn't support ANSI escape codes you would only see the
+literal interpretation. Unless you use wac.
+
+But we have Win32::Console
+--------------------------
+
+I know that Perl, Ruby, Python etc have native libraries that will do ANSI coloring
+on Windows, but not all platforms have that. If you're using e.g. JRuby on Windows
+there is no such library. So wac will save you.
+
+I have found a bug
+------------------
+
+Great. Just fork this Git repo, clone your fork and fix it. When you have pushed
+your changes back to your repo, send me a pull request.
+
